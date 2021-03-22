@@ -100,6 +100,7 @@ views:
                 icon: 'mdi:format-list-numbered'
               - entity: automation.auto_switch_to_solar_only_charging_at_sunrise
               - entity: automation.switch_to_battery_preferred_output_at_sundown
+              - entity: automation.solar_switch_to_utility_21_soc
         show_header_toggle: false
         title: System Settings
         type: 'custom:vertical-stack-in-card'
@@ -138,12 +139,12 @@ views:
               - entity: sensor.voltronic_battery_float_voltage
                 icon: 'mdi:battery-charging'
                 name: Float Point
-              - entity: sensor.voltronic_battery_recharge_voltage
+              - entity: sensor.voltronic_battery_discharge_current
                 icon: 'mdi:battery-negative'
-                name: Recharge Lvl
-              - entity: sensor.voltronic_battery_redischarge_voltage
+                name: Discharge (A)
+              - entity: sensor.voltronic_battery_charge_current
                 icon: 'mdi:battery-plus'
-                name: Discharge Lvl
+                name: Change (A)
               - entity: sensor.voltronic_battery_under_voltage
                 icon: 'mdi:battery-charging-wireless-outline'
                 name: Critical Cutoff
