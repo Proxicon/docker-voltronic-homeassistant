@@ -1,5 +1,26 @@
-title: Solar Dashboard
+title: Home Dashboard
 views:
+  - title: Switches
+    path: switches
+    icon: 'mdi:home-automation'
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - switch.waterpomp
+        title: RotoTank
+        show_header_toggle: false
+        state_color: true
+        header:
+          type: buttons
+          entities: []
+      - type: weather-forecast
+        entity: weather.home
+        show_forecast: false
+      - type: entities
+        entities:
+          - sun.sun
+        title: Sun
   - badges: []
     cards:
       - cards:
@@ -7,6 +28,10 @@ views:
               - entity: sensor.voltronic_battery_capacity
                 name: Battey SOC
                 icon: 'mdi:battery'
+                type: sensor
+              - entity: sensor.voltronic_load_watt
+                name: Inv Load
+                icon: 'mdi:current-ac'
                 type: sensor
               - entity: sensor.voltronic_pv_in_voltage
                 name: PV Voltage (V)
@@ -157,3 +182,85 @@ views:
         type: 'custom:vertical-stack-in-card'
     icon: 'mdi:grid'
     title: Solar Configuration
+  - icon: 'mdi:power-plug'
+    title: Power
+    path: power
+    panel: false
+    badges: []
+    cards:
+      - entities:
+          - sensor.hourly_solar_energy
+        hour24: true
+        hours_to_show: 24
+        name: Solar Hourly Energy Meter
+        points_per_hour: 1
+        show:
+          graph: bar
+        type: 'custom:mini-graph-card'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.daily_solar_energy
+        name: Solar Daily Energy Meter
+        hours_to_show: 168
+        aggregate_func: max
+        group_by: date
+        show:
+          graph: bar
+      - type: entities
+        entities:
+          - sensor.hourly_solar_energy
+          - sensor.daily_solar_energy
+          - sensor.weekly_solar_energy
+          - sensor.monthly_solar_energy
+          - sensor.yearly_solar_energy
+        title: Solar Energy Use
+      - type: entities
+        entities:
+          - sensor.hourly_eskom_energy
+          - sensor.daily_eskom_energy
+          - sensor.weekly_eskom_energy
+          - sensor.monthly_eskom_energy
+          - sensor.yearly_eskom_energy
+        title: Eskom Energy Use
+      - entities:
+          - sensor.hourly_eskom_energy
+        hour24: true
+        hours_to_show: 24
+        name: Eskom Hourly Energy Meter
+        points_per_hour: 1
+        show:
+          graph: bar
+        type: 'custom:mini-graph-card'
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.daily_eskom_energy
+        name: Eskom Daily Energy Meter
+        hours_to_show: 168
+        aggregate_func: max
+        group_by: date
+        show:
+          graph: bar
+      - type: entities
+        entities:
+          - binary_sensor.shellyem_c7face_overpowering
+          - sensor.shellyem_c7face_channel_1_power
+          - sensor.shellyem_c7face_channel_1_energy
+          - sensor.shellyem_c7face_channel_1_energy_returned
+          - sensor.shellyem_c7face_channel_1_voltage
+          - sensor.shellyem_c7face_channel_2_power
+          - sensor.shellyem_c7face_channel_2_energy
+          - sensor.shellyem_c7face_channel_2_energy_returned
+          - sensor.shellyem_c7face_channel_2_voltage
+          - switch.shellyem_c7face
+        title: Garage
+  - title: Grafana Analytics
+    path: grafana-analytics
+    icon: 'mdi:home-analytics'
+    panel: true
+    badges: []
+    cards:
+      - type: iframe
+        url: >-
+          https://[redacted]/d/3D38IbwGz/power-utilisation-and-solar-array?viewPanel=5&orgId=1&refresh=1m&from=1616498235885&to=1616519835885
+        aspect_ratio: 100%
+        title: Power Utilization
