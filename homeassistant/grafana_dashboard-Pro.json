@@ -1,0 +1,3950 @@
+{
+	"annotations": {
+	  "list": [
+		{
+		  "builtIn": 1,
+		  "datasource": "-- Grafana --",
+		  "enable": true,
+		  "hide": true,
+		  "iconColor": "rgba(0, 211, 255, 1)",
+		  "name": "Annotations & Alerts",
+		  "type": "dashboard"
+		}
+	  ]
+	},
+	"editable": true,
+	"gnetId": null,
+	"graphTooltip": 1,
+	"id": 1,
+	"links": [],
+	"panels": [
+	  {
+		"collapsed": true,
+		"datasource": null,
+		"gridPos": {
+		  "h": 1,
+		  "w": 24,
+		  "x": 0,
+		  "y": 0
+		},
+		"id": 21,
+		"panels": [
+		  {
+			"aliasColors": {
+			  "Battey Output": "green",
+			  "Grid Input": "red",
+			  "Inverter Output": "blue",
+			  "PV Input": "orange",
+			  "Rack Input": "#E24D42",
+			  "Server Rack - Current (A)": "#1F78C1",
+			  "Server Rack - Watts (W)": "#E24D42",
+			  "W.mean": "#7EB26D",
+			  "switch.server_rack.mean": "#EAB839"
+			},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {},
+				"custom": {},
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": []
+				},
+				"unit": "none"
+			  },
+			  "overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+			  "h": 11,
+			  "w": 24,
+			  "x": 0,
+			  "y": 1
+			},
+			"hiddenSeries": false,
+			"id": 5,
+			"legend": {
+			  "alignAsTable": false,
+			  "avg": false,
+			  "current": false,
+			  "hideEmpty": true,
+			  "hideZero": true,
+			  "max": true,
+			  "min": true,
+			  "rightSide": false,
+			  "show": true,
+			  "total": false,
+			  "values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+			  "alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.4.5",
+			"pointradius": 5,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+			  {
+				"alias": "PV Input",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "linear"
+					],
+					"type": "fill"
+				  }
+				],
+				"hide": false,
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "AA",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_pv_in_watts"
+				  }
+				]
+			  },
+			  {
+				"alias": "Inverter Output",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "linear"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"query": "SELECT mean(\"value\") FROM \"W\" WHERE (\"entity_id\" = 'voltronic_load_watt') AND $timeFilter GROUP BY time($interval) fill(linear)",
+				"rawQuery": false,
+				"refId": "BB",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_load_watt"
+				  }
+				]
+			  },
+			  {
+				"alias": "Grid Input",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "linear"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "CC",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_1_power"
+				  }
+				]
+			  },
+			  {
+				"alias": "Battey Output",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "linear"
+					],
+					"type": "fill"
+				  }
+				],
+				"hide": false,
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "DD",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					},
+					{
+					  "params": [
+						"* 48  "
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_discharge_current"
+				  }
+				]
+			  }
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "System Watts (In/Out)",
+			"tooltip": {
+			  "shared": true,
+			  "sort": 0,
+			  "value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+			  "buckets": null,
+			  "mode": "time",
+			  "name": null,
+			  "show": true,
+			  "values": []
+			},
+			"yaxes": [
+			  {
+				"$$hashKey": "object:938",
+				"format": "none",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  },
+			  {
+				"$$hashKey": "object:939",
+				"format": "short",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  }
+			],
+			"yaxis": {
+			  "align": false,
+			  "alignLevel": null
+			}
+		  },
+		  {
+			"aliasColors": {
+			  "A.mean": "#7EB26D",
+			  "Discharge Current": "#E24D42",
+			  "Server Rack - Current (A)": "#BA43A9",
+			  "Server Rack - Watts (W)": "#1F78C1",
+			  "switch.server_rack.mean": "#EAB839"
+			},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"custom": {}
+			  },
+			  "overrides": []
+			},
+			"fill": 2,
+			"fillGradient": 0,
+			"gridPos": {
+			  "h": 7,
+			  "w": 12,
+			  "x": 0,
+			  "y": 12
+			},
+			"hiddenSeries": false,
+			"hideTimeOverride": false,
+			"id": 9,
+			"legend": {
+			  "alignAsTable": false,
+			  "avg": true,
+			  "current": true,
+			  "hideEmpty": true,
+			  "hideZero": true,
+			  "max": true,
+			  "min": true,
+			  "rightSide": false,
+			  "show": true,
+			  "total": false,
+			  "values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+			  "alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.4.5",
+			"pointradius": 1,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": true,
+			"steppedLine": false,
+			"targets": [
+			  {
+				"alias": "Charge Current",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_charge_current"
+				  }
+				]
+			  },
+			  {
+				"alias": "Discharge Current",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "B",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_discharge_current"
+				  }
+				]
+			  }
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Battery Bank Charge/Discharge",
+			"tooltip": {
+			  "shared": true,
+			  "sort": 0,
+			  "value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+			  "buckets": null,
+			  "mode": "time",
+			  "name": null,
+			  "show": true,
+			  "values": []
+			},
+			"yaxes": [
+			  {
+				"$$hashKey": "object:2069",
+				"format": "none",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  },
+			  {
+				"$$hashKey": "object:2070",
+				"format": "short",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  }
+			],
+			"yaxis": {
+			  "align": false,
+			  "alignLevel": null
+			}
+		  },
+		  {
+			"aliasColors": {
+			  "A.mean": "#7EB26D",
+			  "Discharge Current": "#EAB839",
+			  "PV Current (A)": "#1F78C1",
+			  "PV Watts (W)": "#6ED0E0",
+			  "Server Rack - Current (A)": "#BA43A9",
+			  "Server Rack - Watts (W)": "#1F78C1",
+			  "switch.server_rack.mean": "#EAB839"
+			},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"custom": {}
+			  },
+			  "overrides": []
+			},
+			"fill": 0,
+			"fillGradient": 0,
+			"gridPos": {
+			  "h": 7,
+			  "w": 12,
+			  "x": 12,
+			  "y": 12
+			},
+			"hiddenSeries": false,
+			"hideTimeOverride": false,
+			"id": 15,
+			"legend": {
+			  "alignAsTable": false,
+			  "avg": false,
+			  "current": false,
+			  "hideEmpty": true,
+			  "hideZero": true,
+			  "max": true,
+			  "min": true,
+			  "rightSide": false,
+			  "show": true,
+			  "total": false,
+			  "values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+			  "alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.4.5",
+			"pointradius": 1,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [
+			  {
+				"$$hashKey": "object:1412",
+				"alias": "PV Current",
+				"yaxis": 2
+			  },
+			  {
+				"$$hashKey": "object:1413",
+				"alias": "PV Current (A)",
+				"yaxis": 2
+			  }
+			],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+			  {
+				"alias": "PV Watts (W)",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "linear"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_pv_in_watts"
+				  }
+				]
+			  },
+			  {
+				"alias": "PV Current (A)",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "linear"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "B",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_pv_in_current"
+				  }
+				]
+			  },
+			  {
+				"alias": "PV Volts (V)",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "linear"
+					],
+					"type": "fill"
+				  }
+				],
+				"hide": false,
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "C",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_pv_in_voltage"
+				  }
+				]
+			  }
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "PV Input Current",
+			"tooltip": {
+			  "shared": true,
+			  "sort": 0,
+			  "value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+			  "buckets": null,
+			  "mode": "time",
+			  "name": null,
+			  "show": true,
+			  "values": []
+			},
+			"yaxes": [
+			  {
+				"$$hashKey": "object:1426",
+				"format": "none",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  },
+			  {
+				"$$hashKey": "object:1427",
+				"format": "short",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  }
+			],
+			"yaxis": {
+			  "align": false,
+			  "alignLevel": null
+			}
+		  },
+		  {
+			"aliasColors": {
+			  "A.mean": "#705DA0",
+			  "Server Rack - Current (A)": "#BA43A9",
+			  "Server Rack - Watts (W)": "#1F78C1",
+			  "V.mean": "yellow",
+			  "switch.server_rack.mean": "#EAB839"
+			},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "InfluxDB",
+			"description": "Assumes 50% Discharge maximum on battery bank - To give approx. 3000 Cycles (8Years on bank)",
+			"fieldConfig": {
+			  "defaults": {
+				"custom": {},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"fill": 0,
+			"fillGradient": 0,
+			"gridPos": {
+			  "h": 7,
+			  "w": 12,
+			  "x": 0,
+			  "y": 19
+			},
+			"hiddenSeries": false,
+			"id": 14,
+			"legend": {
+			  "alignAsTable": false,
+			  "avg": false,
+			  "current": true,
+			  "hideEmpty": true,
+			  "hideZero": true,
+			  "max": true,
+			  "min": true,
+			  "show": true,
+			  "total": false,
+			  "values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+			  "alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.4.5",
+			"pointradius": 1,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_voltage"
+				  }
+				]
+			  }
+			],
+			"thresholds": [
+			  {
+				"$$hashKey": "object:6185",
+				"colorMode": "warning",
+				"fill": true,
+				"fillColor": "rgba(0, 105, 130, 0)",
+				"line": true,
+				"lineColor": "rgba(9, 135, 194, 0.21)",
+				"op": "lt",
+				"value": 48,
+				"yaxis": "left"
+			  },
+			  {
+				"$$hashKey": "object:6186",
+				"colorMode": "ok",
+				"fill": true,
+				"fillColor": "#1F60C4",
+				"line": true,
+				"lineColor": "#1F60C4",
+				"op": "gt",
+				"value": 48,
+				"yaxis": "left"
+			  },
+			  {
+				"$$hashKey": "object:6188",
+				"colorMode": "critical",
+				"fill": true,
+				"fillColor": "#C4162A",
+				"line": true,
+				"lineColor": "#C4162A",
+				"op": "gt",
+				"value": 54,
+				"yaxis": "left"
+			  }
+			],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Battery Bank Voltage (V)",
+			"tooltip": {
+			  "shared": true,
+			  "sort": 0,
+			  "value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+			  "buckets": null,
+			  "mode": "time",
+			  "name": null,
+			  "show": true,
+			  "values": []
+			},
+			"yaxes": [
+			  {
+				"$$hashKey": "object:6156",
+				"decimals": null,
+				"format": "volt",
+				"label": "",
+				"logBase": 1,
+				"max": "56",
+				"min": "46",
+				"show": true
+			  },
+			  {
+				"$$hashKey": "object:6157",
+				"format": "short",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  }
+			],
+			"yaxis": {
+			  "align": false,
+			  "alignLevel": null
+			}
+		  },
+		  {
+			"aliasColors": {},
+			"bars": false,
+			"cacheTimeout": null,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {},
+				"custom": {},
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": []
+				},
+				"unit": "percent"
+			  },
+			  "overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+			  "h": 7,
+			  "w": 12,
+			  "x": 12,
+			  "y": 19
+			},
+			"hiddenSeries": false,
+			"hideTimeOverride": true,
+			"id": 7,
+			"interval": null,
+			"legend": {
+			  "avg": false,
+			  "current": false,
+			  "max": false,
+			  "min": false,
+			  "show": true,
+			  "total": false,
+			  "values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"maxDataPoints": 100,
+			"nullPointMode": "null",
+			"options": {
+			  "alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.4.5",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "auto"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "%",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_capacity"
+				  }
+				]
+			  }
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Battery Array Capacity",
+			"tooltip": {
+			  "shared": true,
+			  "sort": 0,
+			  "value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+			  "buckets": null,
+			  "mode": "time",
+			  "name": null,
+			  "show": true,
+			  "values": []
+			},
+			"yaxes": [
+			  {
+				"$$hashKey": "object:7000",
+				"format": "percent",
+				"label": null,
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  },
+			  {
+				"$$hashKey": "object:7001",
+				"format": "short",
+				"label": null,
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  }
+			],
+			"yaxis": {
+			  "align": false,
+			  "alignLevel": null
+			}
+		  },
+		  {
+			"aliasColors": {
+			  "Server Rack - Current (A)": "#EAB839",
+			  "switch.server_rack.mean": "#EAB839"
+			},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"custom": {}
+			  },
+			  "overrides": []
+			},
+			"fill": 0,
+			"fillGradient": 0,
+			"gridPos": {
+			  "h": 7,
+			  "w": 12,
+			  "x": 0,
+			  "y": 26
+			},
+			"hiddenSeries": false,
+			"id": 3,
+			"legend": {
+			  "alignAsTable": false,
+			  "avg": false,
+			  "current": true,
+			  "hideEmpty": true,
+			  "hideZero": true,
+			  "max": false,
+			  "min": true,
+			  "show": true,
+			  "total": false,
+			  "values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+			  "alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.4.5",
+			"pointradius": 5,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+			  {
+				"alias": "AC Grid Volts",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_ac_grid_voltage"
+				  }
+				]
+			  }
+			],
+			"thresholds": [
+			  {
+				"$$hashKey": "object:7155",
+				"colorMode": "critical",
+				"fill": true,
+				"line": true,
+				"op": "gt",
+				"value": 250,
+				"yaxis": "left"
+			  },
+			  {
+				"$$hashKey": "object:7156",
+				"colorMode": "warning",
+				"fill": true,
+				"fillColor": "rgba(255, 207, 0, 0.1)",
+				"line": true,
+				"lineColor": "rgb(255, 217, 0)",
+				"op": "lt",
+				"value": 220,
+				"yaxis": "left"
+			  }
+			],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Grid Voltage Fluctuations",
+			"tooltip": {
+			  "shared": true,
+			  "sort": 0,
+			  "value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+			  "buckets": null,
+			  "mode": "time",
+			  "name": null,
+			  "show": true,
+			  "values": []
+			},
+			"yaxes": [
+			  {
+				"$$hashKey": "object:3146",
+				"format": "volt",
+				"label": "",
+				"logBase": 1,
+				"max": "260",
+				"min": "210",
+				"show": true
+			  },
+			  {
+				"$$hashKey": "object:3147",
+				"format": "short",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  }
+			],
+			"yaxis": {
+			  "align": false,
+			  "alignLevel": null
+			}
+		  },
+		  {
+			"aliasColors": {
+			  "Server Rack - Current (A)": "#EAB839",
+			  "switch.server_rack.mean": "#EAB839"
+			},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"custom": {}
+			  },
+			  "overrides": []
+			},
+			"fill": 0,
+			"fillGradient": 0,
+			"gridPos": {
+			  "h": 7,
+			  "w": 12,
+			  "x": 12,
+			  "y": 26
+			},
+			"hiddenSeries": false,
+			"id": 30,
+			"legend": {
+			  "alignAsTable": false,
+			  "avg": false,
+			  "current": true,
+			  "hideEmpty": true,
+			  "hideZero": true,
+			  "max": false,
+			  "min": true,
+			  "show": true,
+			  "total": false,
+			  "values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+			  "alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.4.5",
+			"pointradius": 5,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+			  {
+				"alias": "AC Inverter Volts",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_ac_out_voltage"
+				  }
+				]
+			  }
+			],
+			"thresholds": [
+			  {
+				"$$hashKey": "object:7155",
+				"colorMode": "critical",
+				"fill": true,
+				"line": true,
+				"op": "gt",
+				"value": 250,
+				"yaxis": "left"
+			  },
+			  {
+				"$$hashKey": "object:7156",
+				"colorMode": "warning",
+				"fill": true,
+				"fillColor": "rgba(255, 207, 0, 0.1)",
+				"line": true,
+				"lineColor": "rgb(255, 217, 0)",
+				"op": "lt",
+				"value": 220,
+				"yaxis": "left"
+			  }
+			],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "AC Inverter Volts Out",
+			"tooltip": {
+			  "shared": true,
+			  "sort": 0,
+			  "value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+			  "buckets": null,
+			  "mode": "time",
+			  "name": null,
+			  "show": true,
+			  "values": []
+			},
+			"yaxes": [
+			  {
+				"$$hashKey": "object:3146",
+				"format": "volt",
+				"label": "",
+				"logBase": 1,
+				"max": "255",
+				"min": "215",
+				"show": true
+			  },
+			  {
+				"$$hashKey": "object:3147",
+				"format": "short",
+				"label": "",
+				"logBase": 1,
+				"max": null,
+				"min": null,
+				"show": true
+			  }
+			],
+			"yaxis": {
+			  "align": false,
+			  "alignLevel": null
+			}
+		  }
+		],
+		"title": "Energy Graphs",
+		"type": "row"
+	  },
+	  {
+		"collapsed": true,
+		"datasource": null,
+		"gridPos": {
+		  "h": 1,
+		  "w": 24,
+		  "x": 0,
+		  "y": 1
+		},
+		"id": 23,
+		"panels": [
+		  {
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"displayName": "kWh",
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "kwatth"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 0,
+			  "y": 2
+			},
+			"id": 6,
+			"links": [],
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "value"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "Eskom - Total KWH",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "kWh",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_1_energy"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Total Eskom kWh Consumed",
+			"type": "stat"
+		  },
+		  {
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"displayName": "kWh",
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "kwatth"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 5,
+			  "y": 2
+			},
+			"id": 24,
+			"links": [],
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "value"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "PV - Total kWh",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "kWh",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_2_energy"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Total Inverter kWh Consumed",
+			"type": "stat"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"decimals": 2,
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "kwatth"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 4,
+			  "x": 10,
+			  "y": 2
+			},
+			"hideTimeOverride": false,
+			"id": 12,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "center",
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "sum"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "value"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "sum"
+					},
+					{
+					  "params": [
+						" / 60 / 1000"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_load_watt"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Inverter kWh Output",
+			"transparent": true,
+			"type": "stat"
+		  },
+		  {
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"displayName": "kWh",
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "kwatth"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 0,
+			  "y": 6
+			},
+			"id": 29,
+			"links": [],
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "value"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "PV - Total kWh",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					},
+					{
+					  "params": [
+						" / 120"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_1_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Total Inverter kWh (Time Series)",
+			"type": "stat"
+		  },
+		  {
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"displayName": "kWh",
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "kwatth"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 5,
+			  "y": 6
+			},
+			"id": 27,
+			"links": [],
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "value"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "PV - Total kWh",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					},
+					{
+					  "params": [
+						" / 500"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_2_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Shelly Inverter kWh (Time Series)",
+			"type": "stat"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"decimals": 2,
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "currencyZAR"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 0,
+			  "y": 10
+			},
+			"hideTimeOverride": false,
+			"id": 28,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "sum"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "auto"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "sum"
+					},
+					{
+					  "params": [
+						" / 60 / 86.4 * 2.20"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_1_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Eskom  (Display Period @ R2.2 / p/kWh)",
+			"type": "stat"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"decimals": 2,
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "currencyZAR"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 5,
+			  "y": 10
+			},
+			"hideTimeOverride": false,
+			"id": 13,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "sum"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "auto"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"query": "SELECT sum(\"value\")  / 60 * 2.20 FROM \"W\" WHERE (\"entity_id\" = 'shellyem_c7face_channel_2_power') AND $timeFilter GROUP BY time($interval) fill(null)",
+				"rawQuery": false,
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "sum"
+					},
+					{
+					  "params": [
+						" / 60 / 86.4 * 2.20"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_2_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Inverter (Display Period @ R2.2 / p/kWh)",
+			"type": "stat"
+		  }
+		],
+		"title": "Dials - kWh & Costs",
+		"type": "row"
+	  },
+	  {
+		"collapsed": true,
+		"datasource": null,
+		"gridPos": {
+		  "h": 1,
+		  "w": 24,
+		  "x": 0,
+		  "y": 2
+		},
+		"id": 26,
+		"panels": [
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"max": 100,
+				"min": 0,
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "rgba(50, 172, 45, 0.97)",
+					  "value": null
+					},
+					{
+					  "color": "rgba(237, 129, 40, 0.89)",
+					  "value": 50
+					},
+					{
+					  "color": "rgba(245, 54, 54, 0.9)",
+					  "value": 70
+					}
+				  ]
+				},
+				"unit": "percent"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 0,
+			  "y": 3
+			},
+			"hideTimeOverride": true,
+			"id": 10,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": true,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "%",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_load_pct"
+				  }
+				]
+			  }
+			],
+			"timeFrom": "10m",
+			"timeShift": null,
+			"title": "System Load (%)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"max": 140,
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					},
+					{
+					  "color": "#EAB839",
+					  "value": 125
+					},
+					{
+					  "color": "red",
+					  "value": 130
+					}
+				  ]
+				},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 3,
+			  "y": 3
+			},
+			"id": 42,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_pv_in_voltage"
+				  }
+				]
+			  }
+			],
+			"title": "PV in (V)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					},
+					{
+					  "color": "red",
+					  "value": 80
+					}
+				  ]
+				},
+				"unit": "amp"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 6,
+			  "y": 3
+			},
+			"id": 33,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_charge_current"
+				  }
+				]
+			  }
+			],
+			"title": "Battery Charge (A)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					},
+					{
+					  "color": "red",
+					  "value": 80
+					}
+				  ]
+				},
+				"unit": "amp"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 9,
+			  "y": 3
+			},
+			"id": 34,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_discharge_current"
+				  }
+				]
+			  }
+			],
+			"title": "Battery Discharge (A)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 12,
+			  "y": 3
+			},
+			"id": 43,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_scc_voltage"
+				  }
+				]
+			  }
+			],
+			"title": "SCC (V)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "orange",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 15,
+			  "y": 3
+			},
+			"id": 38,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_ac_grid_voltage"
+				  }
+				]
+			  }
+			],
+			"title": "Grid in (V)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "blue",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 18,
+			  "y": 3
+			},
+			"id": 39,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_ac_out_voltage"
+				  }
+				]
+			  }
+			],
+			"title": "Inverter Out (V)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					},
+					{
+					  "color": "red",
+					  "value": 80
+					}
+				  ]
+				},
+				"unit": "amp"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 21,
+			  "y": 3
+			},
+			"id": 36,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_max_grid_charge_current"
+				  }
+				]
+			  }
+			],
+			"title": "Setting Grid Charge (A)",
+			"type": "gauge"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"max": 5000,
+				"min": 0,
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "rgba(50, 172, 45, 0.97)",
+					  "value": null
+					},
+					{
+					  "color": "rgba(237, 129, 40, 0.89)",
+					  "value": 3000
+					},
+					{
+					  "color": "rgba(245, 54, 54, 0.9)",
+					  "value": 4000
+					}
+				  ]
+				},
+				"unit": "watt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 0,
+			  "y": 8
+			},
+			"hideTimeOverride": true,
+			"id": 31,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": true,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_load_watt"
+				  }
+				]
+			  }
+			],
+			"timeFrom": "10m",
+			"timeShift": null,
+			"title": "Inverter Out (W)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"max": 36,
+				"min": 0,
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					},
+					{
+					  "color": "semi-dark-blue",
+					  "value": 25
+					},
+					{
+					  "color": "red",
+					  "value": 30
+					}
+				  ]
+				},
+				"unit": "amp"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 3,
+			  "y": 8
+			},
+			"id": 37,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_pv_in_current"
+				  }
+				]
+			  }
+			],
+			"title": "PV in (A)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 6,
+			  "y": 8
+			},
+			"id": 40,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_recharge_voltage"
+				  }
+				]
+			  }
+			],
+			"title": "Battery Recharge (V)",
+			"type": "gauge"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"min": 0,
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "orange",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "rothz"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 15,
+			  "y": 8
+			},
+			"hideTimeOverride": true,
+			"id": 46,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": true,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "Hz",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_ac_grid_frequency"
+				  }
+				]
+			  }
+			],
+			"timeFrom": "10m",
+			"timeShift": null,
+			"title": "Grid AC (Hz)",
+			"type": "gauge"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "blue",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "rothz"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 18,
+			  "y": 8
+			},
+			"hideTimeOverride": true,
+			"id": 47,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": true,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "Hz",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_ac_out_frequency"
+				  }
+				]
+			  }
+			],
+			"timeFrom": "10m",
+			"timeShift": null,
+			"title": "Inverter AC Out (Hz)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					},
+					{
+					  "color": "red",
+					  "value": 80
+					}
+				  ]
+				},
+				"unit": "amp"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 21,
+			  "y": 8
+			},
+			"id": 35,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_max_charge_current"
+				  }
+				]
+			  }
+			],
+			"title": "Setting PV Charge (A)",
+			"type": "gauge"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"max": 8000,
+				"min": 0,
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "dark-orange",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "watt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 0,
+			  "y": 13
+			},
+			"hideTimeOverride": true,
+			"id": 45,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": true,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_1_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": "10m",
+			"timeShift": null,
+			"title": "Eskom in  (W)",
+			"type": "gauge"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"max": 2600,
+				"min": 0,
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "red",
+					  "value": null
+					},
+					{
+					  "color": "#EAB839",
+					  "value": 500
+					},
+					{
+					  "color": "semi-dark-blue",
+					  "value": 1000
+					},
+					{
+					  "color": "dark-green",
+					  "value": 1500
+					}
+				  ]
+				},
+				"unit": "watt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 3,
+			  "y": 13
+			},
+			"hideTimeOverride": true,
+			"id": 44,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": true,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "previous"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_pv_in_watts"
+				  }
+				]
+			  }
+			],
+			"timeFrom": "10m",
+			"timeShift": null,
+			"title": "PV in  (W)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 6,
+			  "y": 13
+			},
+			"id": 41,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_voltage"
+				  }
+				]
+			  }
+			],
+			"title": "Battery (V)",
+			"type": "gauge"
+		  }
+		],
+		"title": "Dials - Inverter Stats",
+		"type": "row"
+	  }
+	],
+	"refresh": "1m",
+	"schemaVersion": 27,
+	"style": "dark",
+	"tags": [],
+	"templating": {
+	  "list": []
+	},
+	"time": {
+	  "from": "now-3h",
+	  "to": "now"
+	},
+	"timepicker": {
+	  "refresh_intervals": [
+		"5s",
+		"10s",
+		"30s",
+		"1m",
+		"5m",
+		"15m",
+		"30m",
+		"1h",
+		"2h",
+		"1d"
+	  ],
+	  "time_options": [
+		"5m",
+		"15m",
+		"1h",
+		"6h",
+		"12h",
+		"24h",
+		"2d",
+		"7d",
+		"30d"
+	  ]
+	},
+	"timezone": "browser",
+	"title": "Power Utilisation & Solar Array",
+	"uid": "3D38IbwGz",
+	"version": 4
+  }
