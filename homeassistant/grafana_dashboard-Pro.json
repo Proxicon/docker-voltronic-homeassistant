@@ -1463,104 +1463,6 @@
 			  "x": 0,
 			  "y": 2
 			},
-			"id": 6,
-			"links": [],
-			"options": {
-			  "colorMode": "value",
-			  "graphMode": "none",
-			  "justifyMode": "auto",
-			  "orientation": "auto",
-			  "reduceOptions": {
-				"calcs": [
-				  "lastNotNull"
-				],
-				"fields": "",
-				"values": false
-			  },
-			  "text": {},
-			  "textMode": "value"
-			},
-			"pluginVersion": "7.4.5",
-			"targets": [
-			  {
-				"alias": "Eskom - Total KWH",
-				"dsType": "influxdb",
-				"groupBy": [
-				  {
-					"params": [
-					  "$interval"
-					],
-					"type": "time"
-				  },
-				  {
-					"params": [
-					  "null"
-					],
-					"type": "fill"
-				  }
-				],
-				"measurement": "kWh",
-				"orderByTime": "ASC",
-				"policy": "default",
-				"refId": "A",
-				"resultFormat": "time_series",
-				"select": [
-				  [
-					{
-					  "params": [
-						"value"
-					  ],
-					  "type": "field"
-					},
-					{
-					  "params": [],
-					  "type": "mean"
-					}
-				  ]
-				],
-				"tags": [
-				  {
-					"key": "entity_id",
-					"operator": "=",
-					"value": "shellyem_c7face_channel_1_energy"
-				  }
-				]
-			  }
-			],
-			"timeFrom": null,
-			"timeShift": null,
-			"title": "Total Eskom kWh Consumed",
-			"type": "stat"
-		  },
-		  {
-			"datasource": "InfluxDB",
-			"fieldConfig": {
-			  "defaults": {
-				"color": {
-				  "mode": "thresholds"
-				},
-				"custom": {},
-				"displayName": "kWh",
-				"mappings": [],
-				"thresholds": {
-				  "mode": "absolute",
-				  "steps": [
-					{
-					  "color": "green",
-					  "value": null
-					}
-				  ]
-				},
-				"unit": "kwatth"
-			  },
-			  "overrides": []
-			},
-			"gridPos": {
-			  "h": 4,
-			  "w": 5,
-			  "x": 5,
-			  "y": 2
-			},
 			"id": 24,
 			"links": [],
 			"options": {
@@ -1628,6 +1530,110 @@
 			"timeFrom": null,
 			"timeShift": null,
 			"title": "Total Inverter kWh Consumed",
+			"type": "stat"
+		  },
+		  {
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"displayName": "kWh",
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "kwatth"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 5,
+			  "y": 2
+			},
+			"id": 27,
+			"links": [],
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "value"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "PV - Total kWh",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					},
+					{
+					  "params": [
+						" / 500"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_2_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Shelly Inverter kWh (Time Series)",
 			"type": "stat"
 		  },
 		  {
@@ -1776,7 +1782,7 @@
 			  "x": 0,
 			  "y": 6
 			},
-			"id": 29,
+			"id": 6,
 			"links": [],
 			"options": {
 			  "colorMode": "value",
@@ -1796,7 +1802,7 @@
 			"pluginVersion": "7.4.5",
 			"targets": [
 			  {
-				"alias": "PV - Total kWh",
+				"alias": "Eskom - Total KWH",
 				"dsType": "influxdb",
 				"groupBy": [
 				  {
@@ -1812,7 +1818,7 @@
 					"type": "fill"
 				  }
 				],
-				"measurement": "W",
+				"measurement": "kWh",
 				"orderByTime": "ASC",
 				"policy": "default",
 				"refId": "A",
@@ -1828,12 +1834,6 @@
 					{
 					  "params": [],
 					  "type": "mean"
-					},
-					{
-					  "params": [
-						" / 120"
-					  ],
-					  "type": "math"
 					}
 				  ]
 				],
@@ -1841,17 +1841,18 @@
 				  {
 					"key": "entity_id",
 					"operator": "=",
-					"value": "shellyem_c7face_channel_1_power"
+					"value": "shellyem_c7face_channel_1_energy"
 				  }
 				]
 			  }
 			],
 			"timeFrom": null,
 			"timeShift": null,
-			"title": "Total Inverter kWh (Time Series)",
+			"title": "Total Eskom kWh Consumed",
 			"type": "stat"
 		  },
 		  {
+			"cacheTimeout": null,
 			"datasource": "InfluxDB",
 			"fieldConfig": {
 			  "defaults": {
@@ -1859,8 +1860,16 @@
 				  "mode": "thresholds"
 				},
 				"custom": {},
-				"displayName": "kWh",
-				"mappings": [],
+				"decimals": 2,
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
 				"thresholds": {
 				  "mode": "absolute",
 				  "steps": [
@@ -1870,7 +1879,7 @@
 					}
 				  ]
 				},
-				"unit": "kwatth"
+				"unit": "currencyZAR"
 			  },
 			  "overrides": []
 			},
@@ -1879,235 +1888,6 @@
 			  "w": 5,
 			  "x": 5,
 			  "y": 6
-			},
-			"id": 27,
-			"links": [],
-			"options": {
-			  "colorMode": "value",
-			  "graphMode": "none",
-			  "justifyMode": "auto",
-			  "orientation": "auto",
-			  "reduceOptions": {
-				"calcs": [
-				  "lastNotNull"
-				],
-				"fields": "",
-				"values": false
-			  },
-			  "text": {},
-			  "textMode": "value"
-			},
-			"pluginVersion": "7.4.5",
-			"targets": [
-			  {
-				"alias": "PV - Total kWh",
-				"dsType": "influxdb",
-				"groupBy": [
-				  {
-					"params": [
-					  "$interval"
-					],
-					"type": "time"
-				  },
-				  {
-					"params": [
-					  "null"
-					],
-					"type": "fill"
-				  }
-				],
-				"measurement": "W",
-				"orderByTime": "ASC",
-				"policy": "default",
-				"refId": "A",
-				"resultFormat": "time_series",
-				"select": [
-				  [
-					{
-					  "params": [
-						"value"
-					  ],
-					  "type": "field"
-					},
-					{
-					  "params": [],
-					  "type": "mean"
-					},
-					{
-					  "params": [
-						" / 500"
-					  ],
-					  "type": "math"
-					}
-				  ]
-				],
-				"tags": [
-				  {
-					"key": "entity_id",
-					"operator": "=",
-					"value": "shellyem_c7face_channel_2_power"
-				  }
-				]
-			  }
-			],
-			"timeFrom": null,
-			"timeShift": null,
-			"title": "Shelly Inverter kWh (Time Series)",
-			"type": "stat"
-		  },
-		  {
-			"cacheTimeout": null,
-			"datasource": "InfluxDB",
-			"fieldConfig": {
-			  "defaults": {
-				"color": {
-				  "mode": "thresholds"
-				},
-				"custom": {},
-				"decimals": 2,
-				"mappings": [
-				  {
-					"id": 0,
-					"op": "=",
-					"text": "N/A",
-					"type": 1,
-					"value": "null"
-				  }
-				],
-				"thresholds": {
-				  "mode": "absolute",
-				  "steps": [
-					{
-					  "color": "green",
-					  "value": null
-					}
-				  ]
-				},
-				"unit": "currencyZAR"
-			  },
-			  "overrides": []
-			},
-			"gridPos": {
-			  "h": 4,
-			  "w": 5,
-			  "x": 0,
-			  "y": 10
-			},
-			"hideTimeOverride": false,
-			"id": 28,
-			"interval": null,
-			"links": [],
-			"maxDataPoints": 100,
-			"options": {
-			  "colorMode": "value",
-			  "graphMode": "none",
-			  "justifyMode": "auto",
-			  "orientation": "horizontal",
-			  "reduceOptions": {
-				"calcs": [
-				  "sum"
-				],
-				"fields": "",
-				"values": false
-			  },
-			  "text": {},
-			  "textMode": "auto"
-			},
-			"pluginVersion": "7.4.5",
-			"targets": [
-			  {
-				"alias": "",
-				"dsType": "influxdb",
-				"groupBy": [
-				  {
-					"params": [
-					  "$interval"
-					],
-					"type": "time"
-				  },
-				  {
-					"params": [
-					  "null"
-					],
-					"type": "fill"
-				  }
-				],
-				"measurement": "W",
-				"orderByTime": "ASC",
-				"policy": "default",
-				"refId": "A",
-				"resultFormat": "time_series",
-				"select": [
-				  [
-					{
-					  "params": [
-						"value"
-					  ],
-					  "type": "field"
-					},
-					{
-					  "params": [],
-					  "type": "sum"
-					},
-					{
-					  "params": [
-						" / 60 / 86.4 * 2.20"
-					  ],
-					  "type": "math"
-					}
-				  ]
-				],
-				"tags": [
-				  {
-					"key": "entity_id",
-					"operator": "=",
-					"value": "shellyem_c7face_channel_1_power"
-				  }
-				]
-			  }
-			],
-			"timeFrom": null,
-			"timeShift": null,
-			"title": "Eskom  (Display Period @ R2.2 / p/kWh)",
-			"type": "stat"
-		  },
-		  {
-			"cacheTimeout": null,
-			"datasource": "InfluxDB",
-			"fieldConfig": {
-			  "defaults": {
-				"color": {
-				  "mode": "thresholds"
-				},
-				"custom": {},
-				"decimals": 2,
-				"mappings": [
-				  {
-					"id": 0,
-					"op": "=",
-					"text": "N/A",
-					"type": 1,
-					"value": "null"
-				  }
-				],
-				"thresholds": {
-				  "mode": "absolute",
-				  "steps": [
-					{
-					  "color": "green",
-					  "value": null
-					}
-				  ]
-				},
-				"unit": "currencyZAR"
-			  },
-			  "overrides": []
-			},
-			"gridPos": {
-			  "h": 4,
-			  "w": 5,
-			  "x": 5,
-			  "y": 10
 			},
 			"hideTimeOverride": false,
 			"id": 13,
@@ -2187,6 +1967,226 @@
 			"timeFrom": null,
 			"timeShift": null,
 			"title": "Inverter (Display Period @ R2.2 / p/kWh)",
+			"type": "stat"
+		  },
+		  {
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"displayName": "kWh",
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "kwatth"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 0,
+			  "y": 10
+			},
+			"id": 29,
+			"links": [],
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "value"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "PV - Total kWh",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					},
+					{
+					  "params": [
+						" / 120"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_1_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Total Inverter kWh (Time Series)",
+			"type": "stat"
+		  },
+		  {
+			"cacheTimeout": null,
+			"datasource": "InfluxDB",
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"decimals": 2,
+				"mappings": [
+				  {
+					"id": 0,
+					"op": "=",
+					"text": "N/A",
+					"type": 1,
+					"value": "null"
+				  }
+				],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "currencyZAR"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 4,
+			  "w": 5,
+			  "x": 0,
+			  "y": 14
+			},
+			"hideTimeOverride": false,
+			"id": 28,
+			"interval": null,
+			"links": [],
+			"maxDataPoints": 100,
+			"options": {
+			  "colorMode": "value",
+			  "graphMode": "none",
+			  "justifyMode": "auto",
+			  "orientation": "horizontal",
+			  "reduceOptions": {
+				"calcs": [
+				  "sum"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "text": {},
+			  "textMode": "auto"
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"alias": "",
+				"dsType": "influxdb",
+				"groupBy": [
+				  {
+					"params": [
+					  "$interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "W",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "sum"
+					},
+					{
+					  "params": [
+						" / 60 / 86.4 * 2.20"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "shellyem_c7face_channel_1_power"
+				  }
+				]
+			  }
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Eskom  (Display Period @ R2.2 / p/kWh)",
 			"type": "stat"
 		  }
 		],
@@ -2367,7 +2367,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -2461,7 +2461,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -2555,7 +2555,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -2645,7 +2645,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -2919,7 +2919,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -3135,7 +3135,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -3205,7 +3205,7 @@
 					}
 				  ]
 				},
-				"unit": "volt"
+				"unit": "watt"
 			  },
 			  "overrides": []
 			},
@@ -3215,7 +3215,7 @@
 			  "x": 6,
 			  "y": 8
 			},
-			"id": 40,
+			"id": 48,
 			"options": {
 			  "orientation": "auto",
 			  "reduceOptions": {
@@ -3225,7 +3225,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -3246,7 +3246,7 @@
 					"type": "fill"
 				  }
 				],
-				"measurement": "V",
+				"measurement": "A",
 				"orderByTime": "ASC",
 				"policy": "default",
 				"refId": "A",
@@ -3262,6 +3262,12 @@
 					{
 					  "params": [],
 					  "type": "mean"
+					},
+					{
+					  "params": [
+						"*48"
+					  ],
+					  "type": "math"
 					}
 				  ]
 				],
@@ -3269,12 +3275,108 @@
 				  {
 					"key": "entity_id",
 					"operator": "=",
-					"value": "voltronic_battery_recharge_voltage"
+					"value": "voltronic_battery_charge_current"
 				  }
 				]
 			  }
 			],
-			"title": "Battery Recharge (V)",
+			"title": "Battery Charge (W)",
+			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "watt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 9,
+			  "y": 8
+			},
+			"id": 49,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": true,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "A",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					},
+					{
+					  "params": [
+						"*48"
+					  ],
+					  "type": "math"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_discharge_current"
+				  }
+				]
+			  }
+			],
+			"title": "Battery Discharge (A)",
 			"type": "gauge"
 		  },
 		  {
@@ -3295,7 +3397,6 @@
 					"value": "null"
 				  }
 				],
-				"min": 0,
 				"thresholds": {
 				  "mode": "absolute",
 				  "steps": [
@@ -3532,7 +3633,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -3850,7 +3951,7 @@
 				"fields": "",
 				"values": false
 			  },
-			  "showThresholdLabels": false,
+			  "showThresholdLabels": true,
 			  "showThresholdMarkers": true,
 			  "text": {}
 			},
@@ -3901,6 +4002,96 @@
 			],
 			"title": "Battery (V)",
 			"type": "gauge"
+		  },
+		  {
+			"datasource": null,
+			"fieldConfig": {
+			  "defaults": {
+				"color": {
+				  "mode": "thresholds"
+				},
+				"custom": {},
+				"mappings": [],
+				"thresholds": {
+				  "mode": "absolute",
+				  "steps": [
+					{
+					  "color": "green",
+					  "value": null
+					}
+				  ]
+				},
+				"unit": "volt"
+			  },
+			  "overrides": []
+			},
+			"gridPos": {
+			  "h": 5,
+			  "w": 3,
+			  "x": 6,
+			  "y": 18
+			},
+			"id": 40,
+			"options": {
+			  "orientation": "auto",
+			  "reduceOptions": {
+				"calcs": [
+				  "lastNotNull"
+				],
+				"fields": "",
+				"values": false
+			  },
+			  "showThresholdLabels": false,
+			  "showThresholdMarkers": true,
+			  "text": {}
+			},
+			"pluginVersion": "7.4.5",
+			"targets": [
+			  {
+				"groupBy": [
+				  {
+					"params": [
+					  "$__interval"
+					],
+					"type": "time"
+				  },
+				  {
+					"params": [
+					  "null"
+					],
+					"type": "fill"
+				  }
+				],
+				"measurement": "V",
+				"orderByTime": "ASC",
+				"policy": "default",
+				"refId": "A",
+				"resultFormat": "time_series",
+				"select": [
+				  [
+					{
+					  "params": [
+						"value"
+					  ],
+					  "type": "field"
+					},
+					{
+					  "params": [],
+					  "type": "mean"
+					}
+				  ]
+				],
+				"tags": [
+				  {
+					"key": "entity_id",
+					"operator": "=",
+					"value": "voltronic_battery_recharge_voltage"
+				  }
+				]
+			  }
+			],
+			"title": "Battery Recharge (V)",
+			"type": "gauge"
 		  }
 		],
 		"title": "Dials - Inverter Stats",
@@ -3946,5 +4137,5 @@
 	"timezone": "browser",
 	"title": "Power Utilisation & Solar Array",
 	"uid": "3D38IbwGz",
-	"version": 4
+	"version": 6
   }
